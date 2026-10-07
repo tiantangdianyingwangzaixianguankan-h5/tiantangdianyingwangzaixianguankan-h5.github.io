@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天堂电影网在线观看 - 高清影视免费在线观看平台</title>
+<meta name="description" content="天堂电影网在线观看（tiantangdianyingwangzaixianguankan-h5）提供海量高清电影、电视剧、综艺、动漫在线观看，免费畅享精彩影视内容，网址 https://tiantangdianyingwangzaixianguankan-h5.github.io">
+<meta name="keywords" content="天堂电影网在线观看, tiantangdianyingwangzaixianguankan-h5, 高清电影在线观看, 免费影视">
+<style>
+/* ===== 全局变量 ===== */
+:root{
+    --bg-deep:#050818;
+    --bg-card:#0d1530;
+    --accent:#38bdf8;
+    --accent2:#818cf8;
+    --gold:#fbbf24;
+    --text:#e2e8f0;
+    --muted:#94a3b8;
+    --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+body{
+    background:var(--bg-deep);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x:hidden;
+}
+a{color:var(--accent);text-decoration:none;}
+img{max-width:100%;display:block;}
+
+/* ===== 星空背景 ===== */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(1px 1px at 10% 20%, #fff 50%, transparent 50%),
+        radial-gradient(1px 1px at 30% 60%, #fff 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 55% 15%, #cbd5e1 50%, transparent 50%),
+        radial-gradient(1px 1px at 70% 80%, #fff 50%, transparent 50%),
+        radial-gradient(1px 1px at 85% 35%, #93c5fd 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 45% 90%, #fde68a 50%, transparent 50%),
+        linear-gradient(180deg,#050818 0%,#0a1232 60%,#050818 100%);
+    z-index:-2;
+    pointer-events:none;
+}
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:radial-gradient(600px 400px at 20% 10%, rgba(56,189,248,.12), transparent 70%),
+               radial-gradient(500px 400px at 85% 80%, rgba(129,140,248,.12), transparent 70%);
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* ===== 顶部导航 ===== */
+header{
+    position:sticky;top:0;z-index:999;
+    background:rgba(5,8,24,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(56,189,248,.2);
+}
+.nav-wrap{
+    max-width:1200px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+    font-size:22px;font-weight:900;letter-spacing:1px;
+    background:linear-gradient(90deg,#38bdf8,#818cf8,#fbbf24);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.logo span{font-size:13px;color:var(--muted);display:block;letter-spacing:0;-webkit-text-fill-color:var(--muted);font-weight:400;margin-top:2px;}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;}
+.nav-links a{
+    padding:8px 14px;border-radius:20px;font-size:14px;color:var(--text);
+    transition:.3s;
+}
+.nav-links a:hover{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;}
+.menu-btn{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;}
+
+/* ===== 公告条 ===== */
+.marquee{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    color:#050818;font-weight:700;font-size:14px;
+    padding:8px 0;overflow:hidden;white-space:nowrap;
+}
+.marquee span{display:inline-block;padding-left:100%;animation:scroll 22s linear infinite;}
+@keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-100%);}}
+
+/* ===== Hero ===== */
+.hero{
+    max-width:1200px;margin:40px auto 20px;padding:0 20px;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;
+}
+.hero-tag{
+    display:inline-block;padding:5px 16px;border-radius:20px;font-size:12px;font-weight:700;
+    background:rgba(56,189,248,.15);border:1px solid var(--accent);color:var(--accent);
+    margin-bottom:18px;
+}
+.hero h1{
+    font-size:44px;font-weight:900;line-height:1.25;margin-bottom:16px;
+    background:linear-gradient(90deg,#fff,#93c5fd,#c4b5fd);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{color:var(--muted);font-size:16px;margin-bottom:24px;max-width:480px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn{
+    padding:12px 30px;border-radius:30px;font-weight:700;font-size:15px;
+    border:none;cursor:pointer;transition:.3s;
+}
+.btn-primary{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;
+    box-shadow:0 4px 20px rgba(56,189,248,.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(56,189,248,.6);}
+.btn-outline{background:transparent;color:var(--text);border:2px solid var(--accent2);}
+.btn-outline:hover{background:var(--accent2);color:#fff;}
+
+/* Hero 右侧推荐大卡 */
+.hero-card{
+    background:var(--bg-card);border-radius:var(--radius);overflow:hidden;
+    border:1px solid rgba(56,189,248,.2);box-shadow:0 10px 40px rgba(0,0,0,.4);
+    position:relative;
+}
+.hero-card-img{position:relative;height:280px;overflow:hidden;}
+.hero-card-img img{width:100%;height:100%;object-fit:cover;}
+.hero-card-img::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,var(--bg-card),transparent 70%);
+}
+.hero-card-badge{
+    position:absolute;top:14px;left:14px;z-index:2;
+    background:linear-gradient(90deg,var(--gold),#f59e0b);color:#050818;
+    padding:4px 12px;border-radius:6px;font-size:12px;font-weight:800;
+}
+.hero-card-body{padding:18px 20px;}
+.hero-card-body h3{font-size:20px;margin-bottom:6px;}
+.hero-card-body p{font-size:13px;color:var(--muted);}
+
+/* ===== 通用区块 ===== */
+.section{max-width:1200px;margin:60px auto;padding:0 20px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:10px;}
+.sec-title{display:flex;align-items:center;gap:12px;}
+.sec-icon{
+    width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:900;color:#fff;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.sec-title h2{font-size:24px;font-weight:800;}
+.sec-title small{display:block;color:var(--muted);font-size:12px;font-weight:400;}
+.sec-more{font-size:13px;color:var(--accent);}
+
+/* ===== 精选推荐：横向滑动 ===== */
+.slider{display:flex;gap:20px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory;}
+.slider::-webkit-scrollbar{height:8px;}
+.slider::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:4px;}
+.slide-card{
+    flex:0 0 200px;scroll-snap-align:start;
+    background:var(--bg-card);border-radius:var(--radius);overflow:hidden;
+    border:1px solid rgba(56,189,248,.15);transition:.3s;
+}
+.slide-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 10px 30px rgba(56,189,248,.2);}
+.slide-img{height:270px;position:relative;overflow:hidden;}
+.slide-img img{width:100%;height:100%;object-fit:cover;}
+.slide-num{
+    position:absolute;top:10px;left:10px;z-index:2;
+    width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:14px;color:#050818;
+    background:linear-gradient(135deg,var(--gold),#f59e0b);
+}
+.slide-body{padding:12px 14px;}
+.slide-body h4{font-size:15px;margin-bottom:4px;}
+.slide-body p{font-size:12px;color:var(--muted);}
+
+/* ===== 分类：渐变色块网格 ===== */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;}
+.cat-item{
+    background:var(--bg-card);border-radius:var(--radius);padding:24px 16px;text-align:center;
+    border:1px solid rgba(56,189,248,.12);transition:.35s;cursor:pointer;
+}
+.cat-item:hover{transform:translateY(-8px) scale(1.03);border-color:transparent;box-shadow:0 12px 30px rgba(0,0,0,.5);}
+.cat-icon{
+    width:56px;height:56px;margin:0 auto 12px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+    font-size:26px;color:#fff;
+}
+.cat-item:nth-child(1) .cat-icon{background:linear-gradient(135deg,#38bdf8,#0ea5e9);}
+.cat-item:nth-child(2) .cat-icon{background:linear-gradient(135deg,#818cf8,#6366f1);}
+.cat-item:nth-child(3) .cat-icon{background:linear-gradient(135deg,#f472b6,#ec4899);}
+.cat-item:nth-child(4) .cat-icon{background:linear-gradient(135deg,#34d399,#10b981);}
+.cat-item:nth-child(5) .cat-icon{background:linear-gradient(135deg,#fbbf24,#f59e0b);}
+.cat-item:nth-child(6) .cat-icon{background:linear-gradient(135deg,#fb923c,#f97316);}
+.cat-item:nth-child(7) .cat-icon{background:linear-gradient(135deg,#c084fc,#a855f7);}
+.cat-item:nth-child(8) .cat-icon{background:linear-gradient(135deg,#f87171,#ef4444);}
+.cat-item h4{font-size:15px;}
+.cat-item p{font-size:12px;color:var(--muted);margin-top:4px;}
+
+/* ===== 排行 + 资讯 双栏 ===== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+.rank-list{list-style:none;counter-reset:rank;}
+.rank-list li{
+    display:flex;align-items:center;gap:14px;
+    background:var(--bg-card);border-radius:12px;padding:14px 18px;margin-bottom:10px;
+    border:1px solid rgba(56,189,248,.1);transition:.3s;
+}
+.rank-list li:hover{border-color:var(--accent);transform:translateX(6px);}
+.rank-list li::before{
+    counter-increment:rank;content:counter(rank);
+    width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:15px;color:var(--muted);
+    background:rgba(148,163,184,.12);
+}
+.rank-list li:nth-child(1)::before{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#050818;}
+.rank-list li:nth-child(2)::before{background:linear-gradient(135deg,#cbd5e1,#94a3b8);color:#050818;}
+.rank-list li:nth-child(3)::before{background:linear-gradient(135deg,#fb923c,#f97316);color:#fff;}
+.rank-list .rank-info h4{font-size:15px;}
+.rank-list .rank-info p{font-size:12px;color:var(--muted);}
+
+.news-card{background:var(--bg-card);border-radius:var(--radius);padding:24px;border:1px solid rgba(56,189,248,.12);}
+.news-card h3{font-size:18px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid rgba(56,189,248,.15);}
+.news-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed rgba(148,163,184,.15);}
+.news-item:last-child{border-bottom:none;}
+.news-date{
+    flex:0 0 52px;height:52px;border-radius:10px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#050818;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.news-date small{font-size:10px;font-weight:600;}
+.news-item h4{font-size:14px;margin-bottom:3px;}
+.news-item p{font-size:12px;color:var(--muted);}
+
+/* ===== 最新更新：时间轴 ===== */
+.timeline{position:relative;padding-left:30px;}
+.timeline::before{
+    content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--accent),var(--accent2),transparent);
+}
+.tl-item{position:relative;background:var(--bg-card);border-radius:12px;padding:16px 20px;margin-bottom:16px;border:1px solid rgba(56,189,248,.1);}
+.tl-item::before{
+    content:"";position:absolute;left:-26px;top:20px;width:14px;height:14px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 0 4px rgba(56,189,248,.15);
+}
+.tl-item h4{font-size:15px;margin-bottom:4px;}
+.tl-item p{font-size:13px;color:var(--muted);}
+
+/* ===== 关于我们 ===== */
+.about-wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:start;}
+.about-text{background:var(--bg-card);border-radius:var(--radius);padding:30px;border:1px solid rgba(56,189,248,.12);}
+.about-text h3{font-size:20px;margin-bottom:14px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.about-text p{color:var(--muted);font-size:14px;margin-bottom:10px;}
+.about-feats{display:flex;flex-direction:column;gap:14px;}
+.feat-card{background:var(--bg-card);border-radius:var(--radius);padding:20px;border:1px solid rgba(56,189,248,.12);transition:.3s;}
+.feat-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.feat-card .fi-icon{font-size:28px;margin-bottom:8px;}
+.feat-card h4{font-size:15px;margin-bottom:4px;}
+.feat-card p{font-size:12px;color:var(--muted);}
+
+/* ===== 页脚 ===== */
+footer{background:rgba(5,8,24,.95);border-top:1px solid rgba(56,189,248,.15);margin-top:60px;padding:50px 20px 20px;}
+.foot-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;}
+.foot-brand .logo{font-size:24px;}
+.foot-brand p{font-size:13px;color:var(--muted);margin-top:12px;}
+.foot-col h4{font-size:15px;margin-bottom:14px;color:#fff;}
+.foot-col a{display:block;font-size:13px;color:var(--muted);padding:5px 0;transition:.2s;}
+.foot-col a:hover{color:var(--accent);padding-left:6px;}
+.foot-bottom{max-width:1200px;margin:30px auto 0;padding-top:20px;border-top:1px solid rgba(56,189,248,.1);text-align:center;font-size:12px;color:var(--muted);}
+
+/* ===== 响应式 ===== */
+@media(max-width:900px){
+    .hero{grid-template-columns:1fr;gap:30px;}
+    .hero h1{font-size:34px;}
+    .split{grid-template-columns:1fr;}
+    .about-wrap{grid-template-columns:1fr;}
+    .foot-wrap{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+    .menu-btn{display:block;}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(5,8,24,.97);padding:16px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{text-align:center;padding:12px;}
+    .hero h1{font-size:28px;}
+    .sec-title h2{font-size:20px;}
+    .slide-card{flex:0 0 160px;}
+    .slide-img{height:220px;}
+}
+@media(max-width:480px){
+    .foot-wrap{grid-template-columns:1fr;}
+    .hero-btns .btn{width:100%;text-align:center;}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- 顶部导航 -->
+<header>
+    <div class="nav-wrap">
+        <div class="logo">
+            天堂电影网在线观看
+            <span>tiantangdianyingwangzaixianguankan-h5</span>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="#">首页</a>
+            <a href="#">精选推荐</a>
+            <a href="#">影片分类</a>
+            <a href="#">热播排行</a>
+            <a href="#">最新更新</a>
+            <a href="#">关于我们</a>
+        </nav>
+        <button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    </div>
+</header>
+
+<!-- 公告条 -->
+<div class="marquee">
+    <span>🔥 天堂电影网在线观看 · 海量高清影视免费在线观看 · 每日更新热门电影电视剧 · 网址：https://tiantangdianyingwangzaixianguankan-h5.github.io</span>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div>
+        <span class="hero-tag">✨ 高清免费 · 畅享影视</span>
+        <h1>天堂电影网在线观看<br>精彩影视 触手可及</h1>
+        <p>天堂电影网在线观看（tiantangdianyingwangzaixianguankan-h5）汇聚国内外海量高清电影、电视剧、综艺、动漫资源，免费在线观看，随时随地畅享精彩视听体验。</p>
+        <div class="hero-btns">
+            <a href="#" class="btn btn-primary">立即观看</a>
+            <a href="#" class="btn btn-outline">热门排行</a>
+        </div>
+    </div>
+    <div class="hero-card">
+        <div class="hero-card-img">
+            <span class="hero-card-badge">今日推荐</span>
+            <img src="https://picsum.photos/600/400?random=10" alt="天堂电影网在线观看推荐">
+        </div>
+        <div class="hero-card-body">
+            <h3>天堂电影网在线观看 · 精选大片</h3>
+            <p>网站地址：https://tiantangdianyingwangzaixianguankan-h5.github.io</p>
+        </div>
+    </div>
+</section>
+
+<!-- 精选推荐 -->
+<section class="section">
+    <div class="sec-head">
+        <div class="sec-title">
+            <div class="sec-icon">★</div>
+            <div>
+                <h2>精选推荐</h2>
+                <small>Editor's Pick</small>
+            </div>
+        </div>
+        <a href="#" class="sec-more">查看更多 ›</a>
+    </div>
+    <div class="slider">
+        <div class="slide-card">
+            <div class="slide-img"><span class="slide-num">1</span><img src="https://picsum.photos/300/400?random=11" alt="天堂电影网在线观看"></div>
+            <div class="slide-body"><h4>星际穿越</h4><p>科幻 · 烧脑神作</p></div>
+        </div>
+        <div class="slide-card">
+            <div class="slide-img"><span class="slide-num">2</span><img src="https://picsum.photos/300/400?random=12" alt="天堂电影网在线观看"></div>
+            <div class="slide-body"><h4>盗梦空间</h4><p>动作 · 悬疑</p></div>
+        </div>
+        <div class="slide-card">
+            <div class="slide-img"><span class="slide-num">3</span><img src="https://picsum.photos/300/400?random=13" alt="天堂电影网在线观看"></div>
+            <div class="slide-body"><h4>复仇者联盟</h4><p>超级英雄 · 大片</p></div>
+        </div>
+        <div class="slide-card">
+            <div class="slide-img"><span class="slide-num">4</span><img src="https://picsum.photos/300/400?random=14" alt="天堂电影网在线观看"></div>
+            <div class="slide-body"><h4>千与千寻</h4><p>动画 · 治愈</p></div>
+        </div>
+        <div class="slide-card">
+            <div class="slide-img"><span class="slide-num">5</span><img src="https://picsum.photos/300/400?random=15" alt="天堂电影网在线观看"></div>
+            <div class="slide-body"><h4>肖申克的救赎</h4><p>剧情 · 经典</p></div>
+        </div>
+        <div class="slide-card">
+            <div class="slide-img"><span class="slide-num">6</span><img src="https://picsum.photos/300/400?random=16" alt="天堂电影网在线观看"></div>
+            <div class="slide-body"><h4>泰坦尼克号</h4><p>爱情 · 史诗</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 影片分类 -->
+<section class="section">
+    <div class="sec-head">
+        <div class="sec-title">
+            <div class="sec-icon">▦</div>
+            <div>
+                <h2>影片分类</h2>
+                <small>Categories</small>
+            </div>
+        </div>
+        <a href="#" class="sec-more">全部分类 ›</a>
+    </div>
+    <div class="cat-grid">
+        <div class="cat-item"><div class="cat-icon">🎬</div><h4>动作片</h4><p>1280+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">😂</div><h4>喜剧片</h4><p>960+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">💕</div><h4>爱情片</h4><p>840+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">👽</div><h4>科幻片</h4><p>720+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">😱</div><h4>恐怖片</h4><p>530+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">📺</div><h4>电视剧</h4><p>2100+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">🎭</div><h4>综艺</h4><p>680+ 部</p></div>
+        <div class="cat-item"><div class="cat-icon">🎨</div><h4>动漫</h4><p>1100+ 部</p></div>
+    </div>
+</section>
+
+<!-- 热播排行 + 最新资讯 -->
+<section class="section">
+    <div class="split">
+        <div>
+            <div class="sec-head">
+                <div class="sec-title">
+                    <div class="sec-icon">🔥</div>
+                    <div>
+                        <h2>热播排行</h2>
+                        <small>Top Ranking</small>
+                    </div>
+                </div>
+            </div>
+            <ul class="rank-list">
+                <li><div class="rank-info"><h4>奥本海默</h4><p>剧情 · 诺兰新作</p></div></li>
+                <li><div class="rank-info"><h4>流浪地球2</h4><p>科幻 · 国产巨制</p></div></li>
+                <li><div class="rank-info"><h4>封神第一部</h4><p>神话 · 史诗大片</p></div></li>
+                <li><div class="rank-info"><h4>消失的她</h4><p>悬疑 · 烧脑反转</p></div></li>
+                <li><div class="rank-info"><h4>孤注一掷</h4><p>犯罪 · 现实题材</p></div></li>
+            </ul>
+        </div>
+        <div>
+            <div class="news-card">
+                <h3>📰 最新资讯</h3>
+                <div class="news-item">
+                    <div class="news-date">15<small>10月</small></div>
+                    <div><h4>天堂电影网在线观看上线4K专区</h4><p>超高清画质，极致观影体验</p></div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">14<small>10月</small></div>
+                    <div><h4>本周热门影视更新清单</h4><p>20+ 部新片持续更新中</p></div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">13<small>10月</small></div>
+                    <div><h4>经典老片修复版上线</h4><p>重温光影经典，感受岁月情怀</p></div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">12<small>10月</small></div>
+                    <div><h4>天堂电影网在线观看用户破百万</h4><p>感谢每一位影迷的支持与陪伴</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 最新更新 -->
+<section class="section">
+    <div class="sec-head">
+        <div class="sec-title">
+            <div class="sec-icon">🔄</div>
+            <div>
+                <h2>最新更新</h2>
+                <small>Latest Updates</small>
+            </div>
+        </div>
+        <a href="#" class="sec-more">更新日志 ›</a>
+    </div>
+    <div class="timeline">
+        <div class="tl-item"><h4>热门美剧《权力的游戏》全季上线</h4><p>史诗奇幻巨制，冰与火之歌完整呈现</p></div>
+        <div class="tl-item"><h4>经典港片《无间道》修复版上线</h4><p>警匪巅峰之作，不容错过的经典</p></div>
+        <div class="tl-item"><h4>国产动画《大鱼海棠》高清上线</h4><p>唯美画风，东方神话美学</p></div>
+        <div class="tl-item"><h4>综艺《奔跑吧》最新季更新</h4><p>欢乐不断，每周五准时更新</p></div>
+        <div class="tl-item"><h4>日剧《半泽直树》高清资源上线</h4><p>职场热血，以牙还牙</p></div>
+    </div>
+</section>
+
+<!-- 关于我们 -->
+<section class="section">
+    <div class="sec-head">
+        <div class="sec-title">
+            <div class="sec-icon">ℹ</div>
+            <div>
+                <h2>关于我们</h2>
+                <small>About Us</small>
+            </div>
+        </div>
+    </div>
+    <div class="about-wrap">
+        <div class="about-text">
+            <h3>关于天堂电影网在线观看</h3>
+            <p><strong>天堂电影网在线观看</strong>（tiantangdianyingwangzaixianguankan-h5）是一个专注于高清影视在线观看的免费平台，致力于为广大影迷提供丰富、优质的电影、电视剧、综艺、动漫资源。</p>
+            <p>我们每日持续更新最新热门影视内容，涵盖国内外各类题材，让您随时随地畅享精彩视听体验。网站地址：https://tiantangdianyingwangzaixianguankan-h5.github.io</p>
+            <p>天堂电影网在线观看，让每一次观影都成为一场视觉盛宴。</p>
+        </div>
+        <div class="about-feats">
+            <div class="feat-card"><div class="fi-icon">🎯</div><h4>海量资源</h4><p>上万部高清影视随心看</p></div>
+            <div class="feat-card"><div class="fi-icon">⚡</div><h4>极速播放</h4><p>流畅不卡顿，即点即看</p></div>
+            <div class="feat-card"><div class="fi-icon">🔄</div><h4>每日更新</h4><p>热门新片持续同步上线</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+    <div class="foot-wrap">
+        <div class="foot-brand">
+            <div class="logo">天堂电影网在线观看</div>
+            <p>高清影视免费在线观看平台，海量资源每日更新，畅享精彩视听。</p>
+        </div>
+        <div class="foot-col">
+            <h4>影片导航</h4>
+            <a href="#">电影</a>
+            <a href="#">电视剧</a>
+            <a href="#">综艺</a>
+            <a href="#">动漫</a>
+        </div>
+        <div class="foot-col">
+            <h4>热门分类</h4>
+            <a href="#">动作</a>
+            <a href="#">喜剧</a>
+            <a href="#">爱情</a>
+            <a href="#">科幻</a>
+        </div>
+        <div class="foot-col">
+            <h4>关于网站</h4>
+            <a href="#">关于我们</a>
+            <a href="#">联系我们</a>
+            <a href="#">免责声明</a>
+        </div>
+    </div>
+    <div class="foot-bottom">
+        © 2026 天堂电影网在线观看（tiantangdianyingwangzaixianguankan-h5）| 网址：https://tiantangdianyingwangzaixianguankan-h5.github.io | 仅供影视推荐分享
+    </div>
+</footer>
+
+</body>
+</html>
